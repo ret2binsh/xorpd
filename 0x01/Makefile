@@ -1,9 +1,12 @@
 CC     = nasm
 CFLAGS = -felf64
 LD     = ld
-IN     = anding.asm
-OBJ    = anding.o
+IN     = prt_fib.asm
+FIBIN  = fib.asm
+OBJ    = prt_fib.o
+FOBJ   = fib.o
 OUT    = prog
+FOUT   = fib
 
 default: $(OBJ)
 	$(LD) $(OBJ) -o $(OUT)
@@ -12,5 +15,12 @@ default: $(OBJ)
 $(OBJ):
 	$(CC) $(CFLAGS) $(IN)
 
+fib: $(FOBJ)
+	$(LD) $(FOBJ) -o $(FOUT)
+	rm -f $(FOBJ)
+
+$(FOBJ):
+	$(CC) $(CFLAGS) $(FIBIN)
+
 clean:
-	rm -f $(OBJ) $(OUT)
+	rm -f $(OUT) $(FOUT)
