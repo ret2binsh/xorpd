@@ -3,5 +3,5 @@ _start:
     mov rax, 0
     mov rdx, 1
 .loop:
-	xadd rax, rdx
+    xadd rax, rdx
     loop .loop
