@@ -3,10 +3,12 @@ section .text
 _start:
     mov rax, 0                  ;seed fibonacci
     mov rdx, 1
+    mov rcx, 0x15
 fib:
     xadd rax, rdx
     push rax
     push rdx
+    push rcx
     xor rcx, rcx
     mov rbx, rax
 strlen:
@@ -40,10 +42,10 @@ print:
     syscall 
 repeat:
     add rsp, rdx
+    pop rcx
     pop rdx
     pop rax
-    cmp rax, 2147483647 
-    jle fib
+    loop fib                    ;loop based on rcx value
 exit:
     mov rax, 60
     syscall
